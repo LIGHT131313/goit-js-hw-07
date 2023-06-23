@@ -16,17 +16,7 @@ function createMarkupItems(arr) {
 }
 list.insertAdjacentHTML('beforeend', createMarkupItems(galleryItems));
 
-list.addEventListener('click', onClickZoomImg);
-
-function onClickZoomImg(evt) {
-	evt.preventDefault();
-
-	if (!evt.target.classList.contains('gallery__image')) {
-		return;
-	}
-
-	new SimpleLightbox('.gallery a', {
-		captionsData: 'alt',
-		captionDelay: 250,
-	});
-}
+new SimpleLightbox('.gallery a', {
+	captionsData: 'alt',
+	captionDelay: 250,
+});

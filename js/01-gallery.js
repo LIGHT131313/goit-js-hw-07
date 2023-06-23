@@ -33,4 +33,12 @@ function onClickZoomImg(evt) {
     <img src="${evt.target.dataset.source}" width="800" height="600" alt="${evt.target.alt}">
 `);
 	createMarkupModal.show();
+
+	document.addEventListener('keydown', onEscKeyClose);
+	function onEscKeyClose(evt) {
+		if (evt.code === 'Escape') {
+			createMarkupModal.close();
+			document.removeEventListener('keydown', onEscKeyClose);
+		}
+	}
 }
