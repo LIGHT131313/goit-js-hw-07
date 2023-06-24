@@ -33,21 +33,17 @@ function onClickZoomImg(evt) {
 		`
     <img src="${evt.target.dataset.source}" width="800" height="600" alt="${evt.target.alt}">
 `,
-		{ onShow: onAddListEscKeyClose, onClose: onEscKeyClose }
+		{
+			onShow: () => document.addEventListener('keydown', onEscKeyClose),
+			onClose: () => document.removeEventListener('keydown', onEscKeyClose),
+		}
 	);
 
 	createMarkupModal.show();
 
-	function onAddListEscKeyClose() {
-		document.addEventListener('keydown', onEscKeyClose);
-	}
-
 	function onEscKeyClose(e) {
 		if (e.code === 'Escape') {
-			document.removeEventListener('keydown', onEscKeyClose);
 			createMarkupModal.close();
-		} else {
-			document.removeEventListener('keydown', onEscKeyClose);
 		}
 	}
 }
