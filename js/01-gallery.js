@@ -29,15 +29,24 @@ function onClickZoomImg(evt) {
 		return;
 	}
 
-	const createMarkupModal = basicLightbox.create(`
+	const createMarkupModal = basicLightbox.create(
+		`
     <img src="${evt.target.dataset.source}" width="800" height="600" alt="${evt.target.alt}">
-`);
+`,
+		{ onShow: onAddListEscKeyClose, onClose: onEscKeyClose }
+	);
+
 	createMarkupModal.show();
 
-	document.addEventListener('keydown', onEscKeyClose);
-	function onEscKeyClose(evt) {
-		if (evt.code === 'Escape') {
+	function onAddListEscKeyClose() {
+		document.addEventListener('keydown', onEscKeyClose);
+	}
+
+	function onEscKeyClose(e) {
+		if (e.code === 'Escape') {
+			document.removeEventListener('keydown', onEscKeyClose);
 			createMarkupModal.close();
+		} else {
 			document.removeEventListener('keydown', onEscKeyClose);
 		}
 	}
